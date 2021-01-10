@@ -7,14 +7,24 @@ const router = express.Router()
 
 router.get("/", (req, res, next) => {
    model.get()
-    .then(source => {
-        res.json(source)
+    .then(project => {
+        res.json(project)
     })
     .catch(err => {
         res.status(500).json({
             message: "failed"
         })
     })
+});
+
+router.get("/:id", (req, res, next)=> {
+    model.getById(req.params.id)
+        .then(project => {
+            res.json(project)
+        })
+        .catch(err =>{
+            next(err)
+        })
 });
 
 
