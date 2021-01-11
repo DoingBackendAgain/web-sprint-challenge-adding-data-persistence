@@ -17,6 +17,23 @@ router.get("/", (req, res, next) => {
     })
 });
 
+router.post("/", (req, res)=> {
+    id = req.params.id
+    const project = {...req.body, id:id}
+
+    model.insert(project)
+        .then((project) => {
+            res.status(201).json(project)
+        })
+        .catch((err)=> {
+            res.status(500).json({
+                message: "error getting data"
+            })
+        })
+});
+
+
+
 router.get("/:id", (req, res, next)=> {
     model.getById(req.params.id)
         .then(project => {

@@ -18,6 +18,11 @@ function getById(id){
         .first();
 }
 
-function insert(){
-
+function insert(project){
+    return db("projects")
+        .insert(project)
+        .then(ids => {
+            return getById(ids[0])
+        })
 }
+
