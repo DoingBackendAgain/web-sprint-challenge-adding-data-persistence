@@ -31,6 +31,6 @@ function getTaskDetails(id){
     return db("tasks")
         .innerJoin("projects", "projects.id", "tasks.project_id")
         .where("tasks.project_id", id)
-        .select("tasks.*", "projects.*")
+        .select("projects.name","projects.description", "tasks.task_description")
 }
 
