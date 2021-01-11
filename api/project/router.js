@@ -44,6 +44,16 @@ router.get("/:id", (req, res, next)=> {
         })
 });
 
+router.get("/:id/tasks", (req,res) => {
+    model.getTaskDetails(req.params.id)
+        .then(task => {
+            res.json(task)
+        })
+        .catch(err => {
+            next(err)
+        })
+})
+
 
 
 module.exports = router;

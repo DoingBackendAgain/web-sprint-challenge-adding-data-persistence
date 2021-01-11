@@ -5,7 +5,8 @@ const db = require("../../data/dbConfig")
 module.exports = {
     get,
     getById,
-    insert
+    insert,
+    getTaskDetails
 };
 
 function get(){
@@ -24,5 +25,12 @@ function insert(project){
         .then(ids => {
             return getById(ids[0])
         })
+}
+
+function getTaskDetails(id){
+    return db("tasks")
+        .innerJoin("projects", "projects.id", "tasks.project_id")
+        .where("tasks.project_id", id)
+        .select("tasks.*", "projects.*")
 }
 
